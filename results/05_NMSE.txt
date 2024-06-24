@@ -1,0 +1,43 @@
+parameters	values
+beta	0.268
+q10_rh	2.64
+diff	2.2
+
+Objective Function Value: 0.000565
+Counts: 11
+Counts: 11
+Convergence:  0
+Messages: CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL
+
+CO2 MSE: 173
+T MSE:   0.0211
+RMSE:    13.2
+
+***Key Metrics***
+TCRE: 1.72
+TCR:  1.79
+
+***Historical Warming and ERF***
+GSAT Warming:              0.925
+Ocean Heat Content Change: 557
+Total Aerosol ERF:         -1.24
+WMGHG ERF:                 4.38
+Methane ERF:               0.544
+
+***Future Warming***
+scenario	start	end	GSAT
+ssp119	2021	2040	0.857
+ssp119	2041	2060	1.14
+ssp119	2081	2100	1.11
+ssp126	2021	2040	0.871
+ssp126	2041	2060	1.32
+ssp126	2081	2100	1.53
+ssp245	2021	2040	0.875
+ssp245	2041	2060	1.53
+ssp245	2081	2100	2.48
+ssp370	2021	2040	0.885
+ssp370	2041	2060	1.67
+ssp370	2081	2100	3.42
+ssp585	2021	2040	1
+ssp585	2041	2060	1.99
+ssp585	2081	2100	4.29

@@ -1,3 +1,4 @@
+# Scripts for experiments 2-4
 # Script to run smoothed temperature runs
 # To keep running mean of a different number of observations, change ROLL_WIDTH
 # Author: Peter Scully
@@ -27,7 +28,7 @@ PARAMS <- c(BETA(), Q10_RH(), DIFFUSIVITY())
 ROLL_WIDTH <- 10
 
 OUTPUT <- file.path(RESULTS_DIR, 
-                    paste("smooth_temps_", ROLL_WIDTH, "yr.txt", sep=""))
+                    paste("04_smooth_temps_", ROLL_WIDTH, "yr.txt", sep=""))
 
 
 

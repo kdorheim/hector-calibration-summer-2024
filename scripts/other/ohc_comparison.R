@@ -113,16 +113,14 @@ get_ohc_data <- function(file, scenario = "historical", include_unc = F) {
 
 obs_data <- get_ohc_data(OHC_FILE, include_unc = T)
 default_data <- calc_ohc(NULL, NULL, include_unc= T)
-reg_box_data <- calc_ohc(PARAMS, c(0.732, 2.64, 2.2, 5, 1.15), include_unc= T)
-big_box_data <- calc_ohc(PARAMS, c(1.196, 3.52, 2, 5, 0.948), include_unc= T)
-bigger_box_data <- calc_ohc(PARAMS, c(1.66, 4.4, 1.8, 6, 0.83), include_unc= T)
+reg_box_data <- calc_ohc(PARAMS, c(0.57, 1.76, 2.38, 2.95, 0.49), include_unc= T)
+low_diff_data <- calc_ohc(PARAMS, c(0.57, 1.76, 1.1, 2.95, 0.49), include_unc= T)
 
 default_data$scenario <- "Hector - Default"
 reg_box_data$scenario <- "Hector - All Params, Reg Box"
-big_box_data$scenario <- "Hector - All Params, Big Box"
-bigger_box_data$scenario <- "Hector - All Params, Bigger Box"
+low_diff_data$scenario <- "Hector - All Params, Reg Box, Diff = 1.1"
 
-comb_data <- rbind(obs_data, default_data, reg_box_data, big_box_data, bigger_box_data)
+comb_data <- rbind(obs_data, default_data, reg_box_data, low_diff_data)
 
 ggplot(data = comb_data, aes(x = year, y = value, color = scenario)) + 
   geom_ribbon(data = 

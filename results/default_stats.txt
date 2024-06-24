@@ -1,0 +1,53 @@
+scenario	year	variable	value	units
+Unnamed Hector core	NA	beta	0.53	(unitless)
+Unnamed Hector core	NA	q10_rh	1.76	(unitless)
+Unnamed Hector core	NA	diff	2.38	cm2/s
+
+Mean of T, CO2 MSEs: 2.31
+Mean of T, CO2 NMSEs: 0.000948
+Mean of T, CO2 NMSEs (with unc): 0.000313
+
+Mean of smooth T, CO2 MSEs (k = 3 ): 2.3
+Mean of smooth T, CO2 NMSEs (k = 3 ): 0.000864
+Mean of smooth T, CO2 MSEs (k = 5 ): 2.3
+Mean of smooth T, CO2 NMSEs (k = 5 ): 0.000846
+Mean of smooth T, CO2 MSEs (k = 10 ): 2.3
+Mean of smooth T, CO2 NMSEs (k = 10 ): 0.000836
+
+CO2 MSE:        4.58
+T MSE:          0.0358
+T MSE with unc: 0.0118
+RMSE:    2.14
+
+CO2 NMSE: 2.74e-07
+T NMSE:   0.0019
+T NMSE with unc: 0.000625
+
+***Key Metrics***
+TCRE: 1.51
+TCR:  1.77
+
+***Historical Warming and ERF***
+GSAT Warming:              0.73
+Ocean Heat Content Change: 471
+Total Aerosol ERF:         -1.24
+WMGHG ERF:                 3.87
+Methane ERF:               0.54
+
+***Future Warming***
+scenario	start	end	GSAT
+ssp119	2021	2040	0.73
+ssp119	2041	2060	0.894
+ssp119	2081	2100	0.716
+ssp126	2021	2040	0.744
+ssp126	2041	2060	1.08
+ssp126	2081	2100	1.1
+ssp245	2021	2040	0.75
+ssp245	2041	2060	1.29
+ssp245	2081	2100	1.98
+ssp370	2021	2040	0.761
+ssp370	2041	2060	1.43
+ssp370	2081	2100	2.94
+ssp585	2021	2040	0.877
+ssp585	2041	2060	1.74
+ssp585	2081	2100	3.79

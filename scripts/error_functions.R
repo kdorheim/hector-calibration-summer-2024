@@ -188,7 +188,7 @@ get_var_mse_unc <- function(obs_data, hector_data, var, yrs, mse_fn) {
 #
 # Note: Assumes observed data contains symmetric upper and lower bounds 1 SD 
 #       away from actual value
-get_var_mse_unc <- function(obs_data, hector_data, var, yrs, mse_fn) {
+get_var_mvsse <- function(obs_data, hector_data, var, yrs, mse_fn) {
   x       <- filter(obs_data, year %in% yrs & variable == var)$value
   x_upper <- filter(obs_data, year %in% yrs & variable == var)$upper
   sd      <- x_upper - x

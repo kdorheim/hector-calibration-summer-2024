@@ -1,3 +1,4 @@
+# Script for experiments #6-#8
 # Script to run smoothed temperature runs
 # To keep running mean of a different number of observations, change ROLL_WIDTH
 # Author: Peter Scully
@@ -27,7 +28,7 @@ PARAMS <- c(BETA(), Q10_RH(), DIFFUSIVITY())
 ROLL_WIDTH <- 10
 
 OUTPUT <- file.path(RESULTS_DIR, 
-                    paste("smooth_temps_nmse_", ROLL_WIDTH, "yr_big_box.txt", sep=""))
+                    paste("08_smooth_temps_nmse_", ROLL_WIDTH, "yr_big_box.txt", sep=""))
 
 
 
@@ -52,7 +53,7 @@ obs_data <- rbind(co2_data, temp_data, smoothed_temp_data)
 best_pars <- run_optim(obs_data = obs_data,
                        ini_file = INI_FILE,
                        params = PARAMS,
-                       lower = c(0,               2.2 - 0.44 * 3, 2.3 - 0.1 * 3),
+                       lower = c(0, 2.2 - 0.44 * 3, 2.3 - 0.1 * 3),
                        upper = c(0.5 + 0.232 * 3, 2.2 + 0.44 * 3, 2.3 + 0.1 * 3),
                        yrs = 1750:2014,
                        vars = c(GMST(), CONCENTRATIONS_CO2()),
