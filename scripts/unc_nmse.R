@@ -1,3 +1,4 @@
+# Script for experiment #9
 # Script to use normalized the T and CO2 MSEs while accounting for T uncertainty
 # manuscript
 # Author: Peter Scully
@@ -22,7 +23,7 @@ TEMP_PATH <-
 INI_FILE <- system.file("input/hector_ssp245.ini", package = "hector")
 PARAMS <- c(BETA(), Q10_RH(), DIFFUSIVITY())
 
-OUTPUT <- file.path(RESULTS_DIR, "unc_nmse_big_box.txt")
+OUTPUT <- file.path(RESULTS_DIR, "09_unc_nmse_big_box.txt")
 
 
 source(file.path(SCRIPTS_DIR, "major_functions.R"))
@@ -36,8 +37,7 @@ obs_data <- rbind(co2_data, temp_data)
 best_pars <- run_optim(obs_data = obs_data,
                        ini_file = INI_FILE,
                        params = PARAMS,
-                       par = c(0, 2.2 - 0.44*3, 2.6),
-                       lower = c(0,               2.2 - 0.44 * 3, 2.3 - 0.1 * 3),
+                       lower = c(0, 2.2 - 0.44 * 3, 2.3 - 0.1 * 3),
                        upper = c(0.5 + 0.232 * 3, 2.2 + 0.44 * 3, 2.3 + 0.1 * 3),
                        yrs = 1750:2014,
                        vars = c(GMST(), CONCENTRATIONS_CO2()),

@@ -1,3 +1,4 @@
+# Script for experiment 5
 # Script to try normalizing the T and CO2 MSEs
 # manuscript
 # Author: Peter Scully
@@ -22,7 +23,7 @@ TEMP_PATH <-
 INI_FILE <- system.file("input/hector_ssp245.ini", package = "hector")
 PARAMS <- c(BETA(), Q10_RH(), DIFFUSIVITY())
 
-OUTPUT <- file.path(RESULTS_DIR, "NMSE_big_box.txt")
+OUTPUT <- file.path(RESULTS_DIR, "05_NMSE_big_box.txt")
 
 
 source(file.path(SCRIPTS_DIR, "major_functions.R"))

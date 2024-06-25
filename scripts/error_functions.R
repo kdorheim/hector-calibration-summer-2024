@@ -188,7 +188,7 @@ get_var_mse_unc <- function(obs_data, hector_data, var, yrs, mse_fn) {
 #
 # Note: Assumes observed data contains symmetric upper and lower bounds 1 SD 
 #       away from actual value
-get_var_mse_unc <- function(obs_data, hector_data, var, yrs, mse_fn) {
+get_var_mvsse <- function(obs_data, hector_data, var, yrs, mse_fn) {
   x       <- filter(obs_data, year %in% yrs & variable == var)$value
   x_upper <- filter(obs_data, year %in% yrs & variable == var)$upper
   sd      <- x_upper - x
@@ -267,6 +267,34 @@ mean_T_CO2_nmse_unc <- function(obs_data, hector_data) {
                          yrs = c(1750, 1850:2014),
                          mse_fn = nmse)  
   return(mean(c(T_mse, CO2_mse)))
+}
+
+# mean_T_CO2_OHC_nmse_unc: function to find the mean of the temperature, CO2, 
+#                          and OHC NMSEs between observed and predicted data
+#                          while accounting for temperature and OHC uncertainty
+#
+# args: 
+#   obs_data    - data frame of observed data formatted like Hector data frame
+#   hector_data - data frame outputted by Hector
+#
+# Returns: Average NMSE between predicted and observed data
+mean_T_CO2_OHC_nmse_unc <- function(obs_data, hector_data) {
+  T_mse <- get_var_mse_unc(obs_data = obs_data, 
+                           hector_data = hector_data, 
+                           var = GMST(), 
+                           yrs = 1850:2014,
+                           mse_fn = nmse_unc)
+  CO2_mse <- get_var_mse(obs_data = obs_data, 
+                         hector_data = hector_data, 
+                         var = CONCENTRATIONS_CO2(), 
+                         yrs = c(1750, 1850:2014),
+                         mse_fn = nmse)  
+  OHC_mse <- get_var_mse_unc(obs_data = obs_data,
+                             hector_data = hector_data,
+                             var = "OHC",
+                             yrs = 1957:2014,
+                             mse_fn = nmse_unc)
+  return(mean(c(T_mse, CO2_mse, OHC_mse)))
 }
 
 # smooth_T_CO2_mse: function to find the mean of smoothed temperature and CO2

@@ -1,3 +1,4 @@
+# Script for experiment 1
 # Script to re-implement the calibration of beta, q10, and diff from the V3
 # manuscript
 # Author: Peter Scully
@@ -22,7 +23,7 @@ TEMP_PATH <-
 INI_FILE <- system.file("input/hector_ssp245.ini", package = "hector")
 PARAMS <- c(BETA(), Q10_RH(), DIFFUSIVITY())
 
-OUTPUT <- file.path(RESULTS_DIR, "initial_experiment.txt")
+OUTPUT <- file.path(RESULTS_DIR, "01_initial_experiment.txt")
 
 
 source(file.path(SCRIPTS_DIR, "major_functions.R"))
