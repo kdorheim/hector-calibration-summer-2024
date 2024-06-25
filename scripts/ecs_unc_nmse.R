@@ -1,3 +1,4 @@
+# Script for running experiment 10
 # Script to use normalized the T and CO2 MSEs while accounting for T uncertainty
 # Also includes ECS as a param to optimize over
 # Author: Peter Scully
@@ -22,7 +23,7 @@ TEMP_PATH <-
 INI_FILE <- system.file("input/hector_ssp245.ini", package = "hector")
 PARAMS <- c(BETA(), Q10_RH(), DIFFUSIVITY(), ECS())
 
-OUTPUT <- file.path(RESULTS_DIR, "ecs_unc_nmse_big_box.txt")
+OUTPUT <- file.path(RESULTS_DIR, "10_ecs_unc_nmse_big_box.txt")
 
 
 source(file.path(SCRIPTS_DIR, "major_functions.R"))
