@@ -18,6 +18,9 @@ INPUT_TCR <- file.path(IDEAL_RUNS, "hector_1pctCO2.ini")
 OCEAN_AREA <- 5100656e8 * (1 - 0.29) # The total area of the ocean
 W_TO_ZJ <- 3.155693e-14              # Watts to ZJ
 
+# Other Numeric Constants
+CO2_OBS_SD <- 0.12
+
 # Constants for TCRE and ERF calculations
 EMISSIONS_VARS <- c(FFI_EMISSIONS(), LUC_EMISSIONS())
 UPTAKE_VARS <- c(LUC_UPTAKE(), DACCS_UPTAKE())
@@ -64,8 +67,8 @@ get_co2_data <- function(file, scenario = "historical", include_unc = F) {
   co2_data$units <- " ppmv CO2"
   
   if (include_unc) {
-    co2_data$upper <- co2_data$value
-    co2_data$lower <- co2_data$value
+    co2_data$upper <- co2_data$value + CO2_OBS_SD
+    co2_data$lower <- co2_data$value - CO2_OBS_SD
   }
   
   return(co2_data)
@@ -96,6 +99,49 @@ get_temp_data <- function(file, scenario = "historical", include_unc = F) {
   }
   
   return(temp_data)
+}
+
+# get_ohc_data - function to get ocean heat content data
+#
+# args:
+#   file - path to historical OHC data file
+#   scenario - name of scenario being run (default: "historical")
+#   include_unc - boolean indicating whether to include uncertainty data
+#                 (default: F)
+#
+# returns: Hector-style data frame with OHC data
+get_ohc_data <- function(file, scenario = "historical", include_unc = F) {
+  
+  # Reading in only OHC data
+  ohc_data <- read.table(file, 
+                         skip = 2, 
+                         sep = ",",
+                         colClasses = c("numeric", "NULL", "NULL", "NULL",
+                                        "NULL", "NULL", "NULL", "numeric",
+                                        "numeric"))
+  
+  # Fixing table formatting
+  ohc_data <- na.omit(ohc_data)
+  colnames(ohc_data) <- c("year", "value", "unc")
+  
+  # Getting rid of non-integer years
+  ohc_data$year <- ohc_data$year - 0.5
+  
+  # Adding in new columns to match Hector data frames
+  ohc_data$scenario <- scenario
+  ohc_data$variable <- "OHC"
+  ohc_data$units <- "ZJ"
+  
+  # Adding in confidence interval (if applicable)
+  if (include_unc) {
+    ohc_data$lower <- ohc_data$value - ohc_data$unc
+    ohc_data$upper <- ohc_data$value + ohc_data$unc
+  }
+  
+  # Getting rid of raw uncertainty column
+  ohc_data$unc <- NULL
+  
+  return(ohc_data)
 }
 
 
@@ -255,6 +301,31 @@ run_hector <- function(ini_file, params, vals, yrs, vars, include_unc = F) {
   # Rescaling temperatures (if applicable)
   if (GMST() %in% vars) {
     data <- rel_to_interval(data = data, var = GMST(), start = 1961, end = 1990)
+  }
+  
+  # Measuring ocean heat content (if applicable)
+  if (HEAT_FLUX() %in% vars) {
+    
+    ### Converting heat fluxes to cumulative heat content
+    
+    # Getting heat flux data
+    ohc_data <- filter(data, variable == HEAT_FLUX() & year %in% 1957:2014)
+    
+    # Converting heat flux to OHC change by year
+    ohc_data$value <- ohc_data$value * OCEAN_AREA * W_TO_ZJ
+    
+    # Converting OHC changes by year to total OHC (relative to 1957)
+    ohc_data$value <- cumsum(ohc_data$value)
+    ohc_data$variable <- "OHC"
+    
+    # Making OHC relative to 2005-2014 average
+    ohc_data <- rel_to_interval(data = ohc_data,
+                                 var = "OHC",
+                                 start = 2005,
+                                 end = 2014)
+    
+    # Adding ohc data to Hector data frame
+    data <- rbind(data, ohc_data)
   }
   
   # Adding in upper and lower bounds (if applicable)
