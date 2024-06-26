@@ -1,0 +1,47 @@
+parameters	values
+beta	0.570180711089541
+q10_rh	2.49130324827186
+diff	1.0561539710846
+S	3.14417467416082
+alpha	1.08018115662546
+
+Objective Function Value: 0.546
+Counts: 81
+Counts: 81
+Convergence:  52
+Messages: ERROR: ABNORMAL_TERMINATION_IN_LNSRCH
+
+CO2 MSE: 3.8
+T MSE:   0.0434
+RMSE:    1.95
+T MSE accounting for unc: 0.0153
+OHC MSE accounting for unc: 0
+
+***Key Metrics***
+TCRE: 1.8
+TCR:  2.06
+
+***Historical Warming and ERF***
+GSAT Warming:              0.784
+Ocean Heat Content Change: 385
+Total Aerosol ERF:         -1.24
+WMGHG ERF:                 3.89
+Methane ERF:               0.541
+
+***Future Warming***
+scenario	start	end	GSAT
+ssp119	2021	2040	0.898
+ssp119	2041	2060	1.12
+ssp119	2081	2100	0.95
+ssp126	2021	2040	0.912
+ssp126	2041	2060	1.33
+ssp126	2081	2100	1.37
+ssp245	2021	2040	0.91
+ssp245	2041	2060	1.57
+ssp245	2081	2100	2.44
+ssp370	2021	2040	0.916
+ssp370	2041	2060	1.72
+ssp370	2081	2100	3.54
+ssp585	2021	2040	1.07
+ssp585	2041	2060	2.12
+ssp585	2081	2100	4.58
